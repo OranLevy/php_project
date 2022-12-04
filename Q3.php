@@ -104,6 +104,7 @@
 			if($_POST['new_job'] == 'yes'){
 				echo 'Q5: '.$_POST['work_scope'].'<br>';
 				echo 'Q6: '.$_POST['work_experience'];
+				echo 'test';
 			}
 		}
 	
