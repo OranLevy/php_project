@@ -67,6 +67,9 @@
 			if(q_4 == 'yes'){
 				document.getElementById('q5').style.display = 'block';
 				document.getElementById('q6').style.display = 'block';
+			}else{
+				document.getElementById('q5').style.display = 'none';
+				document.getElementById('q6').style.display = 'none';
 			}
 		}
 	</script>
