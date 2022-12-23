@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<script type="text/javascript"> 
+		function showQuestions(){
+			var q_4 = document.getElementById('new_job').value;
+			if(q_4 == 'yes'){
+				document.getElementById('q5').style.display = 'block';
+				document.getElementById('q6').style.display = 'block';
+			}else{
+				document.getElementById('q5').style.display = 'none';
+				document.getElementById('q6').style.display = 'none';
+			}
+		}
+	</script>
 	</head>
 	<body>
 		<h1 class="headline">Part 1 - General information</h1>
@@ -61,18 +73,7 @@
 			<input type="submit" value="Send">
 		</form>
 	</body>
-	<script type="text/javascript"> 
-		function showQuestions(){
-			var q_4 = document.getElementById('new_job').value;
-			if(q_4 == 'yes'){
-				document.getElementById('q5').style.display = 'block';
-				document.getElementById('q6').style.display = 'block';
-			}else{
-				document.getElementById('q5').style.display = 'none';
-				document.getElementById('q6').style.display = 'none';
-			}
-		}
-	</script>
+
 </html>
 
 <?php
