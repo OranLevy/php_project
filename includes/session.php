@@ -16,9 +16,15 @@ class Session {
         session_start();
         $this->check_login();
     }
+    public function __get($property){
+        if(property_exists($this, $property)){
+            return $this->$property;
+        }
+    }
     public function login($user){
         if($user){
-            $this->user_id = $user->id;
+            $this->user_id = $user->user_id;
+            $_SESSION['user_id']=$user->user_id;
             $this->signed_in = true;
         }
     }
@@ -27,6 +33,9 @@ class Session {
         unset($this->user_id);
         $this->signed_in = false;
     }
+    
 }
+
+$session = new Session();
 ?>
 

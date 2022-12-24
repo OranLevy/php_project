@@ -1,9 +1,11 @@
 <?php
 require_once('database.php');
 class User {
-    private $id;
-    private $name;
+    private $user_id;
+    private $first_name;
+    private $last_name;
     private $password;
+    private $registration_date;
 
     //  General Getter method
     public function __get($property){
@@ -25,21 +27,34 @@ class User {
         }
     }
 
-    public function find_user_by_id($id){
+    public function find_user_by_id_password($user_id, $password){
         global $database;
         $error = null;
-        $result = $database->query("SELECT * FROM users WHERE id ='" . $id . "'");
+        $result = $database->query("SELECT * FROM users WHERE user_id ='" . $user_id . "' AND password = '".$password."'");
         if(!$result){
             $error = 'Cannot find the user. Error is:' . $database->get_connection()->error;
         }elseif($result->num_rows>0){
             $found_user = $result->fetch_assoc();
             $this->instantation($found_user);
         }else{
-            $error = "Cannot find user by this id";
+            $error = "Cannot find user by this user_id";
         }
         return $error;
     }
-
+    public function find_user_by_id($user_id){
+        global $database;
+        $error = null;
+        $result = $database->query("SELECT * FROM users WHERE user_id ='" . $user_id . "'");
+        if(!$result){
+            $error = 'Cannot find the user. Error is:' . $database->get_connection()->error;
+        }elseif($result->num_rows>0){
+            $found_user = $result->fetch_assoc();
+            $this->instantation($found_user);
+        }else{
+            $error = "Cannot find user by this user_id";
+        }
+        return $error;
+    }
     public static function fetch_users(){
         global $database;
         $result = $database->query("SELECT * FROM users");
@@ -58,11 +73,11 @@ class User {
         return $users;
     }
 
-    public static function add_user($id, $name, $password){
+    public static function add_user($user_id, $name, $password){
         global $database;
         $error = null;
-        $enc_password = md5(md5($id) . $password);
-        $sql = "INSERT INTO users (id, name, password) VALUES ('" . $id . "', '" . $name . "', '" . $enc_password . "')";
+        $enc_password = md5(md5($user_id) . $password);
+        $sql = "INSERT INTO users (user_id, name, password) VALUES ('" . $user_id . "', '" . $name . "', '" . $enc_password . "')";
         $result = $database->query($sql);
         if(!$result){
             $error = 'Cannot add user. Error is' . $database->get_connection()->error;

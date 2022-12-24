@@ -1,3 +1,10 @@
+<?php
+require_once('includes/init.php');
+if(!$session->signed_in){
+    header('Location: login.html');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
