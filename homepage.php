@@ -2,7 +2,7 @@
 require_once('includes/init.php');
 global $session;
 if(!$session->signed_in){
-    header('Location: login.php');
+    header('Location: index.html');
     exit;
 }
 $user_id = $session->user_id;

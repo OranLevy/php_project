@@ -2,31 +2,24 @@
 require_once('includes/init.php');
 global $session;
 $error = "";
-if($_POST){
-    $user_id = $_POST['user'];
-    $password = $_POST['password'];
-    $user = new User();
-    $error = $user->find_user_by_id_password($user_id, $password);
-    if(!$error){
-        $session->login($user);
-        header('Location: index.php');
+$info = '';
+    if(!$_POST['user']){
+        $info = 'User is required';
+    }else if(!$_POST['password']){
+        $info = 'Password is required';
     }
-}
+    else{
+        $user_id = $_POST['user'];
+        $password = $_POST['password'];
+        $user = new User();
+        $error = $user->find_user_by_id_password($user_id, $password);
+        if(!$error){
+            $session->login($user);
+            header('Location: homepage.php');
+        }else{
+            $info = 'User or password are incorrect';
+        }
+    }
+    echo $info;
+
 ?>
-
-<html>
-    <head>
-
-    </head>
-    <body>
-        <p id="error-login"><?php echo $error ?></p>
-        <form method="post">
-            <fieldset>
-                <legend>Login</legend>
-                <p><label>User: <input type="text" name="user"></label></p>
-                <p><label>Password: <input type="password" name="password"></label></p>
-                <p><input type="submit" value="Login"></p>
-            </fieldset>
-        </form>
-    </body>
-</html>
