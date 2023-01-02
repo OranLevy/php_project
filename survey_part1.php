@@ -1,5 +1,5 @@
 <?php
-require_once('database.php');
+require_once('includes/database.php');
 class SurveyPart1 {
     private $user_id;
     private $question1;
@@ -84,4 +84,3 @@ class SurveyPart1 {
         return $error;
     }
 }
-?>

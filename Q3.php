@@ -3,7 +3,7 @@
     Or Eshed 316220698 -->
 <?php
 require_once('survey_part1.php');
-require_once('database.php');
+require_once('includes/database.php');
 include('navbar-menu.html');
 session_start();
 global $database;
