@@ -9,7 +9,7 @@ if($_POST){
     $error = $user->find_user_by_id_password($user_id, $password);
     if(!$error){
         $session->login($user);
-        header('Location: index.php');
+        header('Location: Q3.php');
     }
 }
 ?>

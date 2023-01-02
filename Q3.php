@@ -14,6 +14,7 @@ if($database->get_connection()){
 }
 unset($_SESSION['error']);
 unset($_SESSION['error_sql']);
+$user_id = $_SESSION['user_id'];
 
 if ($_POST) {
 	if (!$_POST['city_q']) {
@@ -39,10 +40,11 @@ if ($_POST) {
 		$_SESSION['error'] = $error;
 		// echo $error;
 	} else {
-		if (!$database->id_exist_answers("oranle")) {
-			$error_sql = SurveyPart1::add_answers("oranle", $_POST['city_q'], $_POST['age_q'], $_POST['work_in'], $_POST['new_job'], $_POST['work_scope'], $_POST['work_experience']);
+		if (!$database->id_exist_answers($user_id)) {
+			$error_sql = SurveyPart1::add_answers($user_id, $_POST['city_q'], $_POST['age_q'], $_POST['work_in'], $_POST['new_job'], $_POST['work_scope'], $_POST['work_experience']);
+            $error_sql = 'Answers added.';
 		} else {
-			$error_sql = SurveyPart1::update_answers("oranle", $_POST['city_q'], $_POST['age_q'], $_POST['work_in'], $_POST['new_job'], $_POST['work_scope'], $_POST['work_experience']);
+			$error_sql = SurveyPart1::update_answers($user_id, $_POST['city_q'], $_POST['age_q'], $_POST['work_in'], $_POST['new_job'], $_POST['work_scope'], $_POST['work_experience']);
 			$error_sql = $error_sql . 'ID of the answers already exist in DB <br>Updating answers.';
 		}
 		if (isset($error_sql)) {
