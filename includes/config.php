@@ -1,8 +1,9 @@
 <?php
-    define('DB_HOST', 'localhost');
-    define('DB_USER', 'root');
-    define('DB_PASS', '');
-    define('DB_NAME', 'php_project');
+const DB_HOST = 'localhost';
+const DB_USER = 'root';
+const DB_PASS = 'root';
+const DB_NAME = 'php_project';
+
 ?>
 
 

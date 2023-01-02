@@ -1,5 +1,6 @@
 <?php
 require_once('includes/init.php');
+global $session;
 if(!$session->signed_in){
     header('Location: login.php');
     exit;
