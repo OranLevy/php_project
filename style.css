@@ -94,7 +94,7 @@ section{
     margin-top: 10px;
 }
 
-.error {
+#php_error {
     margin-bottom: 20px;
     width: 10%;
     background: #facfcf;
@@ -103,7 +103,7 @@ section{
     border-radius: 10px;
 }
 
-#success_q {
+#php_success {
     width: 20%;
     margin-bottom: 20px;
     background: #d0eec0;
@@ -114,11 +114,12 @@ section{
 }
 
 #login-nav{
-    width: 120px;
+    width: 100%;
     margin-left: auto;
     background: #0c76ba;
     margin-right: 30px;
     border-radius: 15px;
+    height: 100%;
 }
 
 #login-nav img{

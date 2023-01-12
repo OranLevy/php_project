@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<main>
+    <section>
+        <h1 class="headline">Part 3 - Job search</h1>
+        <form method="post" class="form" action="part3.php">
+            <div class="error" id="php_error">
+                <?php if(isset($_SESSION['error'])){
+							echo $_SESSION['error'];
+						}
+						?>
+            </div>
+            <div id="php_success" style="display: none;">
+                <?php if(isset($_SESSION['error_sql'])){
+							echo $_SESSION['error_sql'];
+						}else{
+							if($_POST && !isset($_SESSION['error'])){
+								echo 'Answers submitted';
+							}
+
+						}
+						?>
+            </div>
+            <div id="q12">
+                <label> 12. In which sources did you look for job? </label>
+                <p class="required_message">* Required</p>
+                <p class="q_paragraph">
+                    <input type="checkbox" name="search_source"  class="search_source" value="linkdein">Linkdein <br>
+                    <input type="checkbox" name="search_source"  class="search_source" value="linkdein">Facebook <br>
+                    <input type="checkbox" name="search_source"  class="search_source" value="google">Google <br>
+                </p>
+            </div>
+            <br>
+            <div id="q13">
+                <label for="hour_search">13. How long did you invest for searching work?</label>
+                <p class="required_message">* Required</p>
+                <p class="q_paragraph">
+                    <input type="number" name="hour_search" id="hour_search">
+                </p>
+            </div>
+            <br>
+            <div id="q14">
+                <label for="get_accepted">14. Did you ever get accepted to work?</label>
+                <p class="required_message">* Required</p>
+                <p class="q_paragraph">
+                    <select name="get_accepted" id="get_accepted">
+                        <option value="-">-</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </p>
+            </div>
+            <br>
+            <div class="q15">
+                <label for="hiring_test">15. Have you done a test/interview during the hiring process?</label>
+                <p class="required_message">* Required</p>
+                <p class="q_paragraph">
+                    <select name="hiring_test" id="hiring_test">
+                        <option value="-">-</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </p>
+            </div>
+            <br>
+            <div id="q11">
+                <label for="test_prepared">16. Did you get prepared to the test?</label>
+                <p class="required_message">* Required</p>
+                <p class="q_paragraph">
+                    <select name="test_prepared" id="test_prepared">
+                        <option value="-">-</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </p>
+            </div>
+            <br>
+            <input class="btn-submit" type="submit" value="Send">
+        </form>
+    </section>
+</main>
+</body>
+<script type="text/javascript">
+
+
+    function showDivsError() {
+        if (document.getElementById('php_error').childNodes.length > 1) {
+            document.getElementById('php_error').style.display = 'block';
+        } else {
+            document.getElementById('php_error').style.display = 'none';
+        }
+
+        if (document.getElementById('php_success').childNodes.length > 1) {
+            document.getElementById('php_success').style.display = 'block';
+        } else {
+            document.getElementById('php_success').style.display = 'none';
+        }
+    }
+
+    showDivsError();
+</script>
+</html>

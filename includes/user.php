@@ -73,11 +73,11 @@ class User {
         return $users;
     }
 
-    public static function add_user($user_id, $name, $password){
+    public static function add_user($user_id, $first_name, $last_name, $password){
         global $database;
         $error = null;
         $enc_password = md5(md5($user_id) . $password);
-        $sql = "INSERT INTO users (user_id, name, password) VALUES ('" . $user_id . "', '" . $name . "', '" . $enc_password . "')";
+        $sql = "INSERT INTO users (user_id, first_name, last_name ,password) VALUES ('" . $user_id . "', '" . $first_name . "', '". $last_name ."' ,'" . $enc_password . "')";
         $result = $database->query($sql);
         if(!$result){
             $error = 'Cannot add user. Error is' . $database->get_connection()->error;

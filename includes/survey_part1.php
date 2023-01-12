@@ -83,4 +83,14 @@ class SurveyPart1 {
         }
         return $error;
     }
+
+    public static function check_id_answers($id){
+         global $database;
+         $sql = "SELECT user_id FROM survey_part1 WHERE user_id = '" . $id . "'";
+         $result = $database->query($sql)->fetch_all();
+         if(count($result) > 0){
+             return true;
+         }
+         return false;
+    }
 }
