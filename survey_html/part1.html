@@ -14,8 +14,8 @@
 						?>
       </div>
       <div id="php_success" style="display: none;">
-        <?php if(isset($_SESSION['error_sql'])){
-							echo $_SESSION['error_sql'];
+        <?php if(isset($_SESSION['success'])){
+							echo $_SESSION['success'];
 						}else{
 							if($_POST && !isset($_SESSION['error'])){
 								echo 'Answers submitted';
@@ -96,39 +96,14 @@
       </div>
       <br>
       <input type="hidden" value="part1" name="part">
-      <input class="btn-submit
-					" type="submit" value="Send">
+      <input class="btn-submit" type="submit" name="save" value="Save">
+      <input class="btn-submit" type="submit" name="save_continue" value="Save and continue">
     </form>
   </section>
 </main>
 </body>
+<script type="text/javascript" src="script.js"></script>
 <script type="text/javascript">
-  function showQuestions(){
-    let q_4 = document.getElementById('new_job').value;
-    if(q_4 === 'yes'){
-      document.getElementById('q5').style.display = 'block';
-      document.getElementById('q6').style.display = 'block';
-    }else{
-      document.getElementById('q5').style.display = 'none';
-      document.getElementById('q6').style.display = 'none';
-    }
-  }
-
-
-  function showDivsError(){
-    if(document.getElementById('php_error').childNodes.length > 1){
-      document.getElementById('php_error').style.display = 'block';
-    }else{
-      document.getElementById('php_error').style.display = 'none';
-    }
-
-    if(document.getElementById('php_success').childNodes.length > 1){
-      document.getElementById('php_success').style.display = 'block';
-    }else{
-      document.getElementById('php_success').style.display = 'none';
-    }
-  }
-
   showDivsError();
 </script>
 </html>

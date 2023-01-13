@@ -2,6 +2,14 @@ function logout(){
     window.location = 'logout.php';
 }
 
+function part2(){
+    window.location = 'part2.php';
+}
+
+function part3(){
+    window.location = 'part3.php';
+}
+
 function showQuestions(){
     let q_4 = document.getElementById('new_job').value;
     if(q_4 === 'yes'){

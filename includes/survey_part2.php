@@ -92,4 +92,20 @@ class SurveyPart2 {
         }
         return false;
     }
+
+    public static function count_answered_by_id($id){
+        global $database;
+        $sql = "SELECT question7, question8, question9, question10, question11 FROM survey_part2 WHERE user_id = '" . $id . "'";
+        $result = $database->query($sql)->fetch_assoc();
+        if(!is_null($result)){
+            $counter = 0;
+            foreach ($result as $val){
+                if($val != '' && $val != '-'){
+                    $counter += 1;
+                }
+            }
+            return $counter;
+        }
+        return 0;
+    }
 }

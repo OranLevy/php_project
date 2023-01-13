@@ -75,7 +75,7 @@ class SurveyPart3 {
     public static function update_answers($user_id, $q12, $q13, $q14, $q15, $q16){
         global $database;
         $error = null;
-        $sql = "UPDATE survey_part3 SET question7 = '" . $q12 . "', question8 = '" . $q13 . "', question9 = '" . $q14 . "', question10 = '" . $q15 . "', question11 = '" . $q16 . "' WHERE user_id = '" . $user_id . "'";
+        $sql = "UPDATE survey_part3 SET question12 = '" . $q12 . "', question13 = '" . $q13 . "', question14 = '" . $q14 . "', question15 = '" . $q15 . "', question16 = '" . $q16 . "' WHERE user_id = '" . $user_id . "'";
         $result = $database->query($sql);
         if(!$result){
             $error = 'ERROR! Cannot update answers. Error: ' . $database->get_connection()->error;
@@ -91,5 +91,21 @@ class SurveyPart3 {
             return true;
         }
         return false;
+    }
+
+    public static function count_answered_by_id($id){
+        global $database;
+        $sql = "SELECT question12, question13, question14, question15, question16 FROM survey_part3 WHERE user_id = '" . $id . "'";
+        $result = $database->query($sql)->fetch_assoc();
+        if(!is_null($result)){
+            $counter = 0;
+            foreach ($result as $val){
+                if(strlen($val) > 1){
+                    $counter += 1;
+                }
+            }
+            return $counter;
+        }
+        return 0;
     }
 }

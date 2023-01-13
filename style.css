@@ -15,8 +15,11 @@ body{
 
 .headline {
     margin-bottom: 60px;
+    text-align: center;
 }
 
+
+#welcome-title { text-align: center}
 .q_paragraph> input, select{
     border: 1px solid #ababab;
     border-radius: 10px;
@@ -101,6 +104,7 @@ section{
     padding: 10px;
     border: 2px solid red;
     border-radius: 10px;
+    margin: auto;
 }
 
 #php_success {
@@ -110,6 +114,7 @@ section{
     padding: 10px;
     border: 2px solid #8bc34a;
     border-radius: 10px;
+    margin: auto;
 
 }
 
@@ -125,4 +130,15 @@ section{
 #login-nav img{
     width: 40%;
     margin: 12px;
+}
+
+.form {
+    text-align: center;
+}
+
+#survey-status{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    font-size: 25px;
 }

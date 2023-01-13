@@ -14,10 +14,10 @@
 						?>
             </div>
             <div id="php_success" style="display: none;">
-                <?php if(isset($_SESSION['error_sql'])){
-							echo $_SESSION['error_sql'];
+                <?php if(isset($_SESSION['success'])){
+							echo $_SESSION['success'];
 						}else{
-							if($_POST && !isset($_SESSION['error'])){
+							if($_POST && !isset($_SESSION['success'])){
 								echo 'Answers submitted';
 							}
 
@@ -78,7 +78,8 @@
                 </p>
             </div>
             <br>
-            <input class="btn-submit" type="submit" value="Send">
+            <input class="btn-submit" type="submit" name="save" value="Save">
+            <input class="btn-submit" type="submit" name="save_continue" value="Save and continue">
         </form>
     </section>
 </main>
