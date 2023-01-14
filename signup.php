@@ -10,7 +10,7 @@ if($userArray){
     $f_name = $userArray['f_name'];
     $l_name = $userArray['l_name'];
     $password = $userArray['password'];
-    $error = User::add_user($user_id, $f_name, $l_name, $password);
+    $error = User::add_user($user_id, $f_name, $l_name, $password, 0);
     if(!$error){
         echo 'User added successfully! Click <a href="login.php">here</a> to login.';
     }else{

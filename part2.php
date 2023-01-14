@@ -9,14 +9,17 @@ if($database->get_connection()){
 }else{
     die('Connection failed');
 }
+$user_id = $_SESSION['user_id'];
 if(!$session->signed_in){
     header('Location: login.php');
     exit;
 }
+if(User::is_answered($user_id) == 1){
+    header('Location: index.php');
+    exit;
+}
 unset($_SESSION['error']);
 
-var_dump($_SESSION);
-$user_id = $_SESSION['user_id'];
 if ($_POST) {
     if(isset($_POST['save']) || isset($_POST['save_continue'])){
         if (!$_POST['work_city']) {

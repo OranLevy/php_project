@@ -5,7 +5,7 @@ class User {
     private $first_name;
     private $last_name;
     private $password;
-    private $registration_date;
+    private $survey_answered;
 
     //  General Getter method
     public function __get($property){
@@ -73,14 +73,31 @@ class User {
         return $users;
     }
 
-    public static function add_user($user_id, $first_name, $last_name, $password){
+    public static function add_user($user_id, $first_name, $last_name, $password, $survey_answered){
         global $database;
         $error = null;
         $enc_password = md5(md5($user_id) . $password);
-        $sql = "INSERT INTO users (user_id, first_name, last_name ,password) VALUES ('" . $user_id . "', '" . $first_name . "', '". $last_name ."' ,'" . $enc_password . "')";
+        $sql = "INSERT INTO users (user_id, first_name, last_name ,password, survey_answered) VALUES ('" . $user_id . "', '" . $first_name . "', '". $last_name ."' ,'" . $enc_password . "', '" . $survey_answered . "')";
         $result = $database->query($sql);
         if(!$result){
             $error = 'Cannot add user. Error is' . $database->get_connection()->error;
+        }
+        return $error;
+    }
+
+    public static function is_answered($user_id){
+        global $database;
+        $sql = "SELECT survey_answered FROM users WHERE user_id = '". $user_id ."'";
+        $result = $database->query($sql)->fetch_assoc();
+        return $result['survey_answered'];
+    }
+
+    public static function survey_answered($user_id){
+        global $database;
+        $sql = "UPDATE users SET survey_answered = '1'WHERE user_id = '". $user_id ."'";
+        $result = $database->query($sql);
+        if(!$result){
+            $error = 'ERROR! Cannot update user. Error: ' . $database->get_connection()->error;
         }
         return $error;
     }

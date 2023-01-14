@@ -29,15 +29,22 @@ class SurveyPart1 {
         }
     }
 
-    public function find_answers_by_user($user_id){
+    public static function fetch_answers_by_user($user_id){
         global $database;
         $error = null;
+        $answers = null;
         $result = $database->query("SELECT * FROM survey_part1 WHERE user_id = '" . $user_id . "'");
         if(!$result){
             $error = 'Cannot find answer for this user. Error is:' . $database->get_connection()->error;
         }elseif($result->num_rows>0){
-            $found_answer = $result->fetch_assoc();
-            $this->instantation($found_answer);
+            $i = 0;
+            while($row=$result->fetch_assoc()){
+                $answer = new SurveyPart1();
+                $answer->instantation($row);
+                $answers[$i] = $answer;
+                $i += 1;
+            }
+            $error = $answers;
         }else{
             $error = "Cannot find answers for this user id";
         }
@@ -109,5 +116,34 @@ class SurveyPart1 {
         }
         return 0;
 
+    }
+
+    public static function is_part_done($user_id){
+         global $database;
+        $sql = "SELECT question1, question2, question3, question4, question5, question6  FROM survey_part1 WHERE user_id = '" . $user_id . "'";
+        $result = $database->query($sql)->fetch_assoc();
+        if(!is_null($result)){
+            $counter = 0;
+            // Coniditional question
+            $q4 = $result['question4'];
+            foreach ($result as $val){
+                if(strlen($val) > 1){
+                    $counter += 1;
+                }
+            }
+            if($q4 == 'No'){
+                if($counter == 4){
+                    return true;
+                }
+                return false;
+            }
+            if($q4 == 'Yes'){
+                if($counter == 6){
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
     }
 }

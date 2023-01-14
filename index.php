@@ -17,33 +17,66 @@ $count_part1 = SurveyPart1::count_answered_by_id($user_id);
 $count_part2 = SurveyPart2::count_answered_by_id($user_id);
 $count_part3 = SurveyPart3::count_answered_by_id($user_id);
 $progress = $count_part1 + $count_part2 + $count_part3;
-if($progress > 0){
+if($progress > 0 && $progress < 16 && User::is_answered($user_id) == 0) {
     $progress_message = '<div>Good job! &#128170 <br> You already answered '. $progress .' questions</div>';
-    $survey_button = '<button onclick="startSurvey()">Continue survey</button>';
-}else{
+    $survey_button = '<button name="continue_survey">Continue survey</button>';
+}else if($progress == 0 && User::is_answered($user_id) == 0){
     $progress_message = "<div>Looks like you still didn't start to answer the survey... &#128534 <br> Don't worry! you can do it by clicking just below &#128513 </div>";
-    $survey_button = '<button onclick="startSurvey()">Start survey</button>';
+    $survey_button = '<button name ="start_survey">Start survey</button>';
+}else if(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id) && SurveyPart3::is_part_done($user_id) && User::is_answered($user_id) == 0){
+    $progress_message = "<div>Looks like you answered all the questions! <br> You can submit your answers right here or update your answers before submitting.</div>";
+    $survey_button = '<button name="submit_survey">Submit answers</button> <button name="update_survey">Update answers</button>';
+}else{
+    $progress_message = "<div>Thank you for answering our survey! You can see the submitted answers by clicking <a href='answers.php'>here</a></div>";
+    $survey_button = '';
 }
 
 
+// Handle buttons click
+if($_POST){
+    if(isset($_POST['start_survey'])){
+        header('Location: part1.php');
+        exit;
+    }
+    if(isset($_POST['submit_survey'])){
+        User::survey_answered($user_id);
+        header('Location: index.php');
+        exit;
+    }
+    if(isset($_POST['continue_survey'])){
+        if(!SurveyPart1::is_part_done($user_id)){
+            header('Location: part1.php');
+            exit;
+        }
+        if(!SurveyPart2::is_part_done($user_id)){
+            header('Location: part2.php');
+            exit;
+        }
+        if(!SurveyPart3::is_part_done($user_id)){
+            header('Location: part3.php');
+            exit;
+        }
+    }
+}
+
 ?>
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="preload" as="style" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <script>
-            function startSurvey(){
-                window.location = 'part1.php';
-            }
-        </script>
     </head>
     <body>
         <?php echo $hello_message;?>
         <div id="survey-status">
             <?php
             echo $progress_message;
-            echo $survey_button;
             ?>
         </div>
+        <form method="post">
+            <?php
+            echo $survey_button;
+            ?>
+        </form>
     </body>
 </html>

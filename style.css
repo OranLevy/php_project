@@ -132,7 +132,7 @@ section{
     margin: 12px;
 }
 
-.form {
+.form, form {
     text-align: center;
 }
 
