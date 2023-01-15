@@ -26,12 +26,14 @@ class Session {
             $this->user_id = $user->user_id;
             $_SESSION['user_id']=$user->user_id;
             $this->signed_in = true;
+            setcookie('signed_in', 'true', 0, '/');
         }
     }
     public function logout(){
         unset($_SESSION['user_id']);
         unset($this->user_id);
         $this->signed_in = false;
+        setcookie('signed_in', 'true', time() - 3600, '/');
     }
     
 }

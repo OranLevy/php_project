@@ -77,3 +77,13 @@ if ($_POST) {
 }
 
 include('survey_html/part2.html');
+if(SurveyPart2::check_id_answers($user_id)){
+    $part2_val = SurveyPart2::fetch_answers_by_user($user_id)[0];
+    echo '<script>
+    document.getElementById("work_city").value = "'. $part2_val->question7 .'";
+    document.getElementById("position_q").value = "'. $part2_val->question8 .'";
+    document.getElementById("work_time").value = "'. $part2_val->question9 .'";
+    document.getElementById("salary").value = "'. $part2_val->question10 .'";
+    document.getElementById("get_job").value = "'. $part2_val->question11 .'";
+</script>';
+}

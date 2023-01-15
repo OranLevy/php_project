@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script>
+    if(!document.cookie.includes('signed_in=true')){
+      window.location = '/phpProject/index.php'
+    }
+  </script>
 </head>
 <body>
 <main>

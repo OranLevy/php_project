@@ -37,7 +37,7 @@ function createUser(){
         if(request.readyState === 4 && request.status === 200){
             console.log('oran');
             console.log(request);
-            document.getElementById('php_success').innerHTML = request.responseText;
+            document.getElementById('resp').innerHTML = request.responseText;
         }
     }
     request.open('POST', 'signup.php', true);
@@ -63,7 +63,7 @@ function sendAnswers1(){
             document.getElementById('php_success').innerHTML = request.responseText;
         }
     }
-    request.open('POST', 'signup.php', true);
+    request.open('POST', 'survey.php', true);
     request.setRequestHeader('Content-type', 'application/json');
     let payload = JSON.stringify(data);
     request.send(payload);

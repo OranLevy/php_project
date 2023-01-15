@@ -76,11 +76,37 @@ class User {
     public static function add_user($user_id, $first_name, $last_name, $password, $survey_answered){
         global $database;
         $error = null;
+        if(strlen($user_id) < 5){
+            $error = 'User ID needs to be at least 5 characters';
+        }
+        if(strlen($first_name) == 0){
+            if($error){
+                $error = $error . '<br> First name cannot be empty';
+            }else{
+                $error = 'First name cannot be empty';
+            }
+        }
+        if(strlen($last_name) == 0){
+            if($error){
+                $error = $error . '<br> Last name cannot be empty';
+            }else{
+                $error = 'Last name cannot be empty';
+            }
+        }
+        if(strlen($password) == 0){
+            if($error){
+                $error = $error . '<br> Password cannot be empty';
+            }else{
+                $error = 'Password cannot be empty';
+            }
+        }
         $enc_password = md5(md5($user_id) . $password);
-        $sql = "INSERT INTO users (user_id, first_name, last_name ,password, survey_answered) VALUES ('" . $user_id . "', '" . $first_name . "', '". $last_name ."' ,'" . $enc_password . "', '" . $survey_answered . "')";
-        $result = $database->query($sql);
-        if(!$result){
-            $error = 'Cannot add user. Error is' . $database->get_connection()->error;
+        if(!$error){
+            $sql = "INSERT INTO users (user_id, first_name, last_name ,password, survey_answered) VALUES ('" . $user_id . "', '" . $first_name . "', '". $last_name ."' ,'" . $enc_password . "', '" . $survey_answered . "')";
+            $result = $database->query($sql);
+            if(!$result){
+                $error = 'Cannot add user. Error is' . $database->get_connection()->error;
+            }
         }
         return $error;
     }

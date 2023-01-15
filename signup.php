@@ -12,8 +12,8 @@ if($userArray){
     $password = $userArray['password'];
     $error = User::add_user($user_id, $f_name, $l_name, $password, 0);
     if(!$error){
-        echo 'User added successfully! Click <a href="login.php">here</a> to login.';
+        echo '<div id="php_success">User added successfully! Click <a href="login.php">here</a> to login.</div>';
     }else{
-        echo $error;
+        echo '<div id="php_error">'. $error .'</div>';
     }
 }

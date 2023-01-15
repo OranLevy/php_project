@@ -18,11 +18,9 @@ if(User::is_answered($user_id) == 1){
     header('Location: index.php');
     exit;
 }
-
 unset($_SESSION['error']);
-
 if ($_POST) {
-    if(isset($_POST['save']) || isset($_POST['save_continue'])){
+    if(isset($_POST['save']) || isset($_POST['submit_answers'])){
         if (!isset($_POST['search_source'])) {
             $error = 'Q12 is required.<br>';
         }
@@ -79,3 +77,13 @@ if ($_POST) {
 }
 
 include('survey_html/part3.html');
+if(SurveyPart3::check_id_answers($user_id)){
+    $part3_val = SurveyPart3::fetch_answers_by_user($user_id)[0];
+    echo '<script>
+//    document.getElementById("checkbox").value = "'. $part3_val->question12 .'"; // Fix checkbox issue
+    document.getElementById("hour_search").value = "'. $part3_val->question13 .'";
+    document.getElementById("get_accepted").value = "'. $part3_val->question14 .'";
+    document.getElementById("hiring_test").value = "'. $part3_val->question15 .'";
+    document.getElementById("test_prepared").value = "'. $part3_val->question16 .'";
+</script>';
+}

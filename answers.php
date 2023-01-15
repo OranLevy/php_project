@@ -10,8 +10,7 @@ if (!$session->signed_in) {
     exit;
 }
 $user_id = $session->user_id;
-
-if(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id) && SurveyPart3::is_part_done($user_id)){
+if(User::is_answered($user_id) == 1){
     $part1 = SurveyPart1::fetch_answers_by_user($user_id);
     $part2 = SurveyPart2::fetch_answers_by_user($user_id);
     $part3 = SurveyPart3::fetch_answers_by_user($user_id);
@@ -88,7 +87,6 @@ if(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id) &&
 }else{
     $question_answers_html = '<section>This page is available only after submitting answers.</section>';
 }
-
 ?>
 <!DOCTYPE html>
 <html>

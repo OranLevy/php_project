@@ -8,8 +8,7 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
-  <div id="php_error"></div>
-  <div id="php_success"></div>
+  <div id="resp"></div>
   <form method="post">
     <fieldset>
       <legend>Create user</legend>
@@ -17,7 +16,7 @@
       <p><label>Last name:</label><input type="text" name="l_name" id="l_name"></p>
       <p><label>User ID:</label><input type="text" name="user_id" id="user_id"></p>
       <p><label>Password:</label><input type="password" name="password" id="password"></p>
-      <p><input type="button" value="Create User" onclick="createUser(); showDivsError();" id="submit"></p>
+      <p><input type="button" value="Create User" onclick="createUser()" id="submit"></p>
     </fieldset>
   </form>
   <script src="script.js"></script>

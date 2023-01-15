@@ -4,7 +4,6 @@ require_once('includes/init.php');
 include('navbar-menu.html');
 global $session;
 global $database;
-
 if($database->get_connection()){
 	echo "<script>console.log('Connection OK');</script>";
 }else{
@@ -20,6 +19,7 @@ if(User::is_answered($user_id) == 1){
     exit;
 }
 unset($_SESSION['error']);
+unset($_SESSION['success']);
 if ($_POST) {
     if(isset($_POST['save']) || isset($_POST['save_continue'])){
         if (!$_POST['city_q']) {
@@ -84,7 +84,17 @@ if ($_POST) {
     }
 }
 include('survey_html/part1.html');
-
+if(SurveyPart1::check_id_answers($user_id)){
+    $part1_val = SurveyPart1::fetch_answers_by_user($user_id)[0];
+    echo '<script>
+    document.getElementById("city_q").value = "'. $part1_val->question1 .'";
+    document.getElementById("age_q").value = "'. $part1_val->question2 .'";
+    document.getElementById("work_in").value = "'. $part1_val->question3 .'";
+    document.getElementById("new_job").value = "'. $part1_val->question4 .'";
+    document.getElementById("work_scope").value = "'. $part1_val->question5 .'";
+    document.getElementById("work_scope").value = "'. $part1_val->question6 .'";
+</script>';
+}
 
 
 
