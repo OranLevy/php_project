@@ -5,7 +5,7 @@ require_once('includes/survey_part2.php');
 require_once('includes/survey_part3.php');
 global $session;
 if(!$session->signed_in){
-    header('Location: login.php');
+    header('Location: index.html');
     exit;
 }
 include('navbar-menu.html');
