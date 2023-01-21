@@ -9,16 +9,33 @@
 </head>
 <body>
   <div id="resp"></div>
-  <form method="post">
-    <fieldset>
-      <legend>Create user</legend>
-      <p><label>First name:</label><input type="text" name="f_name" id="f_name"></p>
-      <p><label>Last name:</label><input type="text" name="l_name" id="l_name"></p>
-      <p><label>User ID:</label><input type="text" name="user_id" id="user_id"></p>
-      <p><label>Password:</label><input type="password" name="password" id="password"></p>
-      <p><input type="button" value="Create User" onclick="createUser()" id="submit"></p>
-    </fieldset>
-  </form>
+  <div class="signup-container">
+      <h1 class="signup-title">Create User</h1>
+      <div class="signup-details">Fill your details</div>
+      <form class="signup-form" method="post">
+          <div><input placeholder="First name" type="text" name="f_name" id="f_name">
+          <p class="error-signup" id="error-fname"></p>
+          </div>
+          <div><input placeholder="Last name" type="text" name="l_name" id="l_name">
+          <p class="error-signup" id="error-lname"></p>
+          </div>
+          <div><input placeholder="E-mail" type="email" name="email" id="email">
+          <p class="error-signup" id="error-email"></p>
+          </div>
+          <div><input placeholder="Birthday" type="date" name="birthday" id="birthday">
+          <p class="error-signup" id="error-birthday"></p>
+          </div>
+          <div><input placeholder="User ID" type="text" name="user_id" id="user_id">
+          <p class="error-signup" id="error-userid"></p>
+          </div>
+          <div><input placeholder="Password" type="password" name="password" id="password">
+          <p class="error-signup" id="error-password"></p>
+          </div>
+          <p><input type="button" value="Create User" onclick="createUser()" id="submit"></p>
+      </form>
+      <div id="signup_success"></div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -23,6 +23,17 @@ if ($_POST) {
     if(isset($_POST['save']) || isset($_POST['submit_answers'])){
         if (!isset($_POST['search_source'])) {
             $error = 'Q12 is required.<br>';
+        }else{
+            var_dump($_POST['search_source']);
+            $search_source = '';
+            for($i = 0; $i < sizeof($_POST['search_source']); $i++){
+                if($i != sizeof($_POST['search_source']) -1){
+                    $search_source .= $_POST['search_source'][$i].',';
+                }else{
+                    $search_source .= $_POST['search_source'][$i];
+                }
+            }
+            echo $search_source;
         }
         if (!$_POST['hour_search']) {
             if(isset($error)){
@@ -58,10 +69,10 @@ if ($_POST) {
             unset($_SESSION['success']);
         } else {
             if (!SurveyPart3::check_id_answers($user_id)) {
-                $success = SurveyPart3::add_answers($user_id, $_POST['search_source'], $_POST['hour_search'], $_POST['get_accepted'], $_POST['hiring_test'], $_POST['test_prepared']);
+                $success = SurveyPart3::add_answers($user_id, $search_source, $_POST['hour_search'], $_POST['get_accepted'], $_POST['hiring_test'], $_POST['test_prepared']);
                 $success = 'Answers added.';
             } else {
-                $success = SurveyPart3::update_answers($user_id, $_POST['search_source'], $_POST['hour_search'], $_POST['get_accepted'], $_POST['hiring_test'], $_POST['test_prepared']);
+                $success = SurveyPart3::update_answers($user_id, $search_source, $_POST['hour_search'], $_POST['get_accepted'], $_POST['hiring_test'], $_POST['test_prepared']);
                 $success = $success . 'ID of the answers already exist in DB <br>Updating answers.';
             }
             $_SESSION['success'] = $success;
@@ -79,8 +90,11 @@ if ($_POST) {
 include('survey_html/part3.html');
 if(SurveyPart3::check_id_answers($user_id)){
     $part3_val = SurveyPart3::fetch_answers_by_user($user_id)[0];
+    $q12 = explode(",",$part3_val->question12);
+    foreach ($q12 as $val){
+        echo '<script>document.getElementById("'.$val.'").checked = true </script>';
+    }
     echo '<script>
-//    document.getElementById("checkbox").value = "'. $part3_val->question12 .'"; // Fix checkbox issue
     document.getElementById("hour_search").value = "'. $part3_val->question13 .'";
     document.getElementById("get_accepted").value = "'. $part3_val->question14 .'";
     document.getElementById("hiring_test").value = "'. $part3_val->question15 .'";

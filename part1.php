@@ -22,6 +22,7 @@ unset($_SESSION['error']);
 unset($_SESSION['success']);
 if ($_POST) {
     if(isset($_POST['save']) || isset($_POST['save_continue'])){
+        var_dump($_POST);
         if (!$_POST['city_q']) {
             $error = 'Q1 is required.<br>';
         }
@@ -48,14 +49,14 @@ if ($_POST) {
                 $error = 'Q4 is required.<br>';
             }
         }
-        if ((!$_POST['work_scope'] || $_POST['work_scope'] == '-') && $_POST['new_job'] == 'yes') {
+        if ((!isset($_POST['work_scope']) || $_POST['work_scope'] == '-') && $_POST['new_job'] == 'Yes') {
             if(isset($error)){
                 $error = $error . 'Q5 is required.<br>';
             }else{
                 $error = 'Q5 is required.<br>';
             }
         }
-        if ((!$_POST['work_experience'] || $_POST['work_experience'] == '-') && $_POST['new_job'] == 'yes') {
+        if ((!$_POST['work_experience'] || $_POST['work_experience'] == '-') && $_POST['new_job'] == 'Yes') {
             if(isset($error)){
                 $error = $error . 'Q6 is required.<br>';
             }else{
@@ -83,16 +84,41 @@ if ($_POST) {
         }
     }
 }
+
+// Get cities via API
+$postdata = http_build_query(
+    array(
+        'country' => 'israel',
+    )
+);
+
+$opts = array('http' =>
+    array(
+        'method'  => 'POST',
+        'header'  => 'Content-Type: application/x-www-form-urlencoded',
+        'content' => $postdata
+    )
+);
+
+$context  = stream_context_create($opts);
+
+$result = file_get_contents('https://countriesnow.space/api/v0.1/countries/cities', false, $context);
+$result = json_decode($result);
+$cities_arr = json_encode($result->data);
+echo '<script>let cities ='.$cities_arr.'</script>';
 include('survey_html/part1.html');
 if(SurveyPart1::check_id_answers($user_id)){
     $part1_val = SurveyPart1::fetch_answers_by_user($user_id)[0];
     echo '<script>
-    document.getElementById("city_q").value = "'. $part1_val->question1 .'";
+setTimeout(function(){
+    $("#city_q").select2().val("'. $part1_val->question1 .'").trigger("change");
     document.getElementById("age_q").value = "'. $part1_val->question2 .'";
     document.getElementById("work_in").value = "'. $part1_val->question3 .'";
     document.getElementById("new_job").value = "'. $part1_val->question4 .'";
     document.getElementById("work_scope").value = "'. $part1_val->question5 .'";
-    document.getElementById("work_scope").value = "'. $part1_val->question6 .'";
+    document.getElementById("work_experience").value = "'. $part1_val->question6 .'";
+    showQuestions();
+},200)
 </script>';
 }
 

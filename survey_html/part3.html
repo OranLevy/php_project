@@ -9,10 +9,10 @@
 </head>
 <body>
 <main>
-    <section>
+    <section class="survey-section">
         <h1 class="headline">Part 3 - Job search</h1>
         <form method="post" class="form" action="part3.php">
-            <div class="error" id="php_error">
+            <div class="error" id="php_error" style="display: none;">
                 <?php if(isset($_SESSION['error'])){
 							echo $_SESSION['error'];
 						}
@@ -29,26 +29,29 @@
 						}
 						?>
             </div>
-            <div id="q12">
-                <label>12. In which sources did you look for job?</label>
+            <div id="q12" class="survey-q">
+                <label class="q_label">12. In which sources did you look for job?</label>
                 <p class="required_message">* Required</p>
-                <p class="q_paragraph">
-                    <input type="checkbox" name="search_source"  class="search_source" value="Linkdein">Linkdein <br>
-                    <input type="checkbox" name="search_source"  class="search_source" value="Facebook">Facebook <br>
-                    <input type="checkbox" name="search_source"  class="search_source" value="Google">Google <br>
+                <p class="checkboxes_paragraph">
+                    <input type="checkbox" name="search_source[]" class="search_source" id="Linkdein" value="Linkdein">
+                    <label for="Linkdein">Linkdein</label><br>
+                    <input type="checkbox" name="search_source[]" class="search_source" id="Facebook" value="Facebook">
+                    <label for="Facebook">Facebook</label><br>
+                    <input type="checkbox" name="search_source[]" class="search_source" id="Google" value="Google">
+                    <label for="Google">Google</label>
                 </p>
             </div>
             <br>
-            <div id="q13">
-                <label for="hour_search">13. How long did you invest for searching work?</label>
+            <div id="q13" class="survey-q">
+                <label class="q_label" for="hour_search">13. How long did you invest for searching work?</label>
                 <p class="required_message">* Required</p>
                 <p class="q_paragraph">
                     <input type="number" name="hour_search" id="hour_search">
                 </p>
             </div>
             <br>
-            <div id="q14">
-                <label for="get_accepted">14. Did you ever get accepted to work?</label>
+            <div id="q14" class="survey-q">
+                <label class="q_label" for="get_accepted">14. Did you ever get accepted to work?</label>
                 <p class="required_message">* Required</p>
                 <p class="q_paragraph">
                     <select name="get_accepted" id="get_accepted">
@@ -59,8 +62,8 @@
                 </p>
             </div>
             <br>
-            <div class="q15">
-                <label for="hiring_test">15. Have you done a test/interview during the hiring process?</label>
+            <div id="q15" class="survey-q">
+                <label class="q_label" for="hiring_test">15. Have you done a test/interview during the hiring process?</label>
                 <p class="required_message">* Required</p>
                 <p class="q_paragraph">
                     <select name="hiring_test" id="hiring_test">
@@ -71,8 +74,8 @@
                 </p>
             </div>
             <br>
-            <div id="q16">
-                <label for="test_prepared">16. Did you get prepared to the test?</label>
+            <div id="q16" class="survey-q">
+                <label class="q_label" for="test_prepared">16. Did you get prepared to the test?</label>
                 <p class="required_message">* Required</p>
                 <p class="q_paragraph">
                     <select name="test_prepared" id="test_prepared">
@@ -83,29 +86,14 @@
                 </p>
             </div>
             <br>
-            <input class="btn-submit" type="submit" name="save" value="Save">
+            <input class="btn-save" type="submit" name="save" value="Save">
             <input class="btn-submit" type="submit" name="submit_answers" value="Submit answers">
         </form>
     </section>
 </main>
 </body>
+<script type="text/javascript" src="script.js"></script>
 <script type="text/javascript">
-
-
-    function showDivsError() {
-        if (document.getElementById('php_error').childNodes.length > 1) {
-            document.getElementById('php_error').style.display = 'block';
-        } else {
-            document.getElementById('php_error').style.display = 'none';
-        }
-
-        if (document.getElementById('php_success').childNodes.length > 1) {
-            document.getElementById('php_success').style.display = 'block';
-        } else {
-            document.getElementById('php_success').style.display = 'none';
-        }
-    }
-
     showDivsError();
 </script>
 </html>
