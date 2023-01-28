@@ -40,7 +40,7 @@ if(!(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id) 
 // Handle buttons click
 if($_POST){
     if(isset($_POST['start_survey'])){
-        header('Location: part1.php');
+        header('Location: /phpProject/survey/part1.php');
         exit;
     }
     if(isset($_POST['submit_survey'])){
@@ -54,11 +54,11 @@ if($_POST){
             exit;
         }
         if(!SurveyPart2::is_part_done($user_id)){
-            header('Location: part2.php');
+            header('Location: /phpProject/survey/part2.php');
             exit;
         }
         if(!SurveyPart3::is_part_done($user_id)){
-            header('Location: part3.php');
+            header('Location:/phpProject/survey/ part3.php');
             exit;
         }
     }
