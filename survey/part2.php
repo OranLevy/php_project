@@ -11,11 +11,11 @@ if($database->get_connection()){
 }
 $user_id = $_SESSION['user_id'];
 if(!$session->signed_in){
-    header('Location: /phpProject/login.php');
+    header('Location: /php_project/login.php');
     exit;
 }
 if(User::is_answered($user_id) == 1){
-    header('Location: /phpProject/index.php');
+    header('Location: /php_project/index.php');
     exit;
 }
 unset($_SESSION['error']);
@@ -81,7 +81,7 @@ if ($_POST) {
     }
     if(isset($_POST['save_continue'])){
         if(!isset($error)){
-            header('Location: part3.php');
+            header('Location: /php_project/survey/part3.php');
             exit;
         }
     }
