@@ -1,5 +1,5 @@
 <?php
-require_once('includes/database.php');
+require_once('database.php');
 class SurveyPart1 {
     private $user_id;
     private $question1;
@@ -94,9 +94,11 @@ class SurveyPart1 {
     public static function check_id_answers($id){
          global $database;
          $sql = "SELECT user_id FROM survey_part1 WHERE user_id = '" . $id . "'";
-         $result = $database->query($sql)->fetch_all();
-         if(count($result) > 0){
-             return true;
+         $result = $database->query($sql)->fetch_assoc();
+         if($result){
+             if(count($result) > 0){
+                 return true;
+             }
          }
          return false;
     }
@@ -124,7 +126,7 @@ class SurveyPart1 {
         $result = $database->query($sql)->fetch_assoc();
         if(!is_null($result)){
             $counter = 0;
-            // Coniditional question
+            // Conditional question
             $q4 = $result['question4'];
             foreach ($result as $val){
                 if(strlen($val) > 1){

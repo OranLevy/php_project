@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    if(!document.cookie.includes('signed_in=true')){
+      window.location = '/phpProject/index.php'
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#work_city").select2({
+        data: cities,
+        selectionCssClass: '.q_paragraph>select',
+        placeholder: '-'
+      });
+    });
+  </script>
+</head>
+<body>
+<main>
+  <section class="survey-section">
+    <h1 class="headline">Part 2 - Work experience</h1>
+    <form method="post" class="form" action="part2.php">
+      <?php if(isset($_SESSION['error'])){
+							echo $error_message;
+						}
+						?>
+      <?php if(isset($_SESSION['success'])){
+							echo $success_message;
+						}
+						?>
+      <div id="q7" class="survey-q">
+        <label class="q_label" for="work_city">7. In which city is your work located?</label>
+        <p class="required_message">* Required</p>
+        <p class="q_paragraph">
+          <select name="work_city" id="work_city" class="work_city">
+          </select>
+        </p>
+      </div>
+      <br>
+      <div id="q8" class="survey-q">
+        <label class="q_label" for="position_q">8. What was your position?</label>
+        <p class="required_message">* Required</p>
+        <p class="q_paragraph">
+          <select name="position_q" id="position_q">
+            <option value="-"></option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="QA Engineer">QA Engineer</option>
+            <option value="Technical Support">Technical Support</option>
+            <option value="IT Manager">IT Manager</option>
+            <option value="SOC/NOC">SOC/NOC</option>
+            <option value="Developer">Developer</option>
+            <option value="Other">Other</option>
+          </select>
+        </p>
+      </div>
+      <br>
+      <div id="q9" class="survey-q">
+        <label class="q_label" for="work_time">9. How long did you work there?</label>
+        <p class="required_message">* Required</p>
+        <p class="q_paragraph">
+          <select name="work_time" id="work_time">
+            <option value="-"></option>
+            <option value="1 year">1 year</option>
+            <option value="2 years">2 years</option>
+            <option value="3 years">3 years</option>
+            <option value="4 years">4 years</option>
+            <option value="+5 years">+5 years</option>
+          </select>
+        </p>
+      </div>
+      <br>
+      <div id="q10" class="survey-q">
+        <label class="q_label" for="salary">10. What was your salary per hour?</label>
+        <p class="required_message">* Required</p>
+        <p class="q_paragraph">
+          <input type="number" name="salary" id="salary">
+        </p>
+      </div>
+      <br>
+      <div id="q11" class="survey-q">
+        <label class="q_label" for="get_job">11. How did you get to this job?</label>
+        <p class="required_message">* Required</p>
+        <p class="q_paragraph">
+          <select name="get_job" id="get_job">
+            <option value="-"></option>
+            <option value="Linkdein">Linkdein</option>
+            <option value="Friends">Friends</option>
+            <option value="HR Company">HR Company</option>
+            <option value="Other">Other</option>
+          </select>
+        </p>
+      </div>
+      <br>
+      <input class="btn-save" type="submit" name="save" value="Save">
+      <input class="btn-submit" type="submit" name="save_continue" value="Save and continue">
+    </form>
+  </section>
+</main>
+</body>
+<script type="text/javascript" src="/phpProject/js/script.js"></script>
+</html>

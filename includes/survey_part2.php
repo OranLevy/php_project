@@ -1,5 +1,5 @@
 <?php
-require_once('includes/database.php');
+require_once('database.php');
 class SurveyPart2 {
     private $user_id;
     private $question7;
@@ -93,9 +93,11 @@ class SurveyPart2 {
     public static function check_id_answers($id){
         global $database;
         $sql = "SELECT user_id FROM survey_part2 WHERE user_id = '" . $id . "'";
-        $result = $database->query($sql)->fetch_all();
-        if(count($result) > 0){
-            return true;
+        $result = $database->query($sql)->fetch_assoc();
+        if($result){
+            if(count($result) > 0){
+                return true;
+            }
         }
         return false;
     }
