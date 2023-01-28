@@ -1,7 +1,7 @@
 <?php
-require_once('includes/survey_part3.php');
-require_once('includes/init.php');
-include('navbar-menu.html');
+require_once('../includes/survey_part3.php');
+require_once('../includes/init.php');
+include('../static/navbar-menu.html');
 global $session;
 global $database;
 if($database->get_connection()){
@@ -11,12 +11,15 @@ if($database->get_connection()){
 }
 $user_id = $_SESSION['user_id'];
 if(!$session->signed_in){
-    header('Location: login.php');
+    header('Location: /phpProject/login.php');
     exit;
 }
 if(User::is_answered($user_id) == 1){
-    header('Location: index.php');
+    header('Location: /phpProject/index.php');
     exit;
+}
+if(isset($_SESSION['success'])){
+    $success_message = '<div class="success" id="php_success">'. $_SESSION['success'] .'</div>';
 }
 unset($_SESSION['error']);
 if ($_POST) {
@@ -24,7 +27,6 @@ if ($_POST) {
         if (!isset($_POST['search_source'])) {
             $error = 'Q12 is required.<br>';
         }else{
-            var_dump($_POST['search_source']);
             $search_source = '';
             for($i = 0; $i < sizeof($_POST['search_source']); $i++){
                 if($i != sizeof($_POST['search_source']) -1){
@@ -33,7 +35,6 @@ if ($_POST) {
                     $search_source .= $_POST['search_source'][$i];
                 }
             }
-            echo $search_source;
         }
         if (!$_POST['hour_search']) {
             if(isset($error)){
@@ -66,28 +67,30 @@ if ($_POST) {
 
         if (isset($error)) {
             $_SESSION['error'] = $error;
+            $error_message = '<div class="error" id="php_error">'. $_SESSION['error'] .'</div>';
             unset($_SESSION['success']);
         } else {
             if (!SurveyPart3::check_id_answers($user_id)) {
                 $success = SurveyPart3::add_answers($user_id, $search_source, $_POST['hour_search'], $_POST['get_accepted'], $_POST['hiring_test'], $_POST['test_prepared']);
-                $success = 'Answers added.';
+                $success = 'Answers saved';
             } else {
                 $success = SurveyPart3::update_answers($user_id, $search_source, $_POST['hour_search'], $_POST['get_accepted'], $_POST['hiring_test'], $_POST['test_prepared']);
-                $success = $success . 'ID of the answers already exist in DB <br>Updating answers.';
+                $success = $success . 'Answers saved';
             }
             $_SESSION['success'] = $success;
+            $success_message = '<div class="success" id="php_success">'. $_SESSION['success'] .'</div>';
         }
     }
     if(isset($_POST['submit_answers'])){
         if(!isset($error)){
             User::survey_answered($user_id);
-            header('Location: index.php');
+            header('Location: /phpProject/index.php');
             exit;
         }
     }
 }
 
-include('survey_html/part3.html');
+include('part3.html');
 if(SurveyPart3::check_id_answers($user_id)){
     $part3_val = SurveyPart3::fetch_answers_by_user($user_id)[0];
     $q12 = explode(",",$part3_val->question12);

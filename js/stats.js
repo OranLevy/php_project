@@ -21,16 +21,18 @@ request.onreadystatechange = function(){
         dataPoints.push(data);
         console.log(dataPoints[0])
         // Stat 1
-        let stackedColChart = new CanvasJS.Chart("stackedColumnsContainer", {
+        let stat1Chart = new CanvasJS.Chart("stat1Chart", {
             animationEnabled: true,
             title: {
-                text: "Out of the job seekers, what is the scope of the job requested by age."
+                text: "Out of the job seekers, what is the scope of the job requested by age.",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
             },
             axisX: {
                 interval: 1,
             },
             axisY: {
-                // valueFormatString: "$#0bn",
                 gridColor: "#B6B1A8",
                 tickColor: "#B6B1A8"
             },
@@ -63,17 +65,20 @@ request.onreadystatechange = function(){
                 }
             ]
         });
-        stackedColChart.render();
+        stat1Chart.render();
         // Stat 2
         let cities = Object.keys(dataPoints[0]['stat1']['cities_work_in']);
         let pieData = []
         for(let i = 0; i < cities.length; i++){
             pieData.push({y: dataPoints[0]['stat1']['cities_work_in'][cities[i]] , name: cities[i]})
         }
-        let pieChart = new CanvasJS.Chart("pieChartContainer", {
+        let stat2Chart = new CanvasJS.Chart("stat2Chart", {
             animationEnabled: true,
             title: {
-                text: "The percentage employed in the high-tech industry by city of residence"
+                text: "The percentage employed in the high-tech industry by city of residence",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
             },
             axisX: {
                 interval: 1,
@@ -94,17 +99,20 @@ request.onreadystatechange = function(){
                 }
             ]
         });
-        pieChart.render();
+        stat2Chart.render();
         // Stat 3
         let cities_2 = Object.keys(dataPoints[0]['stat3'])
         let colData = [];
         for(let i = 0; i < cities_2.length; i++){
             colData.push({y: calcAvg(dataPoints[0]['stat3'][cities_2[i]]) ,label: cities_2[i]})
         }
-        let columChart = new CanvasJS.Chart("columnChartContainer", {
+        let stat3Chart = new CanvasJS.Chart("stat3Chart", {
             animationEnabled: true,
             title: {
-                text: "Average salary by city of work"
+                text: "Average salary per hour by city of work",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
             },
             axisX: {
                 interval: 1,
@@ -120,12 +128,11 @@ request.onreadystatechange = function(){
             data: [
                 {
                     type: "column",
-                    showInLegend: true,
                     dataPoints: colData
                 }
             ]
         });
-        columChart.render();
+        stat3Chart.render();
         // Stat 4
         let stat4_cities = Object.keys(dataPoints[0]['stat4'])
         let stat4Data = []
@@ -135,7 +142,10 @@ request.onreadystatechange = function(){
         let stat4Chart = new CanvasJS.Chart("stat4Chart", {
             animationEnabled: true,
             title: {
-                text: "Segmentation of how to start work among users with work experience in the field."
+                text: " Search sources among job seekers",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
             },
             axisX: {
                 interval: 1,
@@ -166,7 +176,10 @@ request.onreadystatechange = function(){
         let stat5Chart = new CanvasJS.Chart("stat5Chart", {
             animationEnabled: true,
             title: {
-                text: "Among job seeker users, what are the search sources "
+                text: "Among job seeker users, what are the search sources",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
             },
             axisX: {
                 interval: 1,
@@ -182,7 +195,6 @@ request.onreadystatechange = function(){
             data: [
                 {
                     type: "column",
-                    showInLegend: true,
                     dataPoints: stat5Data
                 }
             ]
@@ -192,12 +204,15 @@ request.onreadystatechange = function(){
         let stat6_exp = Object.keys(dataPoints[0]['stat6']);
         let stat6Data = [];
         for(let i = 0; i < stat6_exp.length; i++){
-            stat6Data.push({y: dataPoints[0]['stat6'][stat6_exp[i]], label: stat6_exp[i]})
+            stat6Data.push({y: dataPoints[0]['stat6'][stat6_exp[i]], label: stat6_exp[i] === 'experience_avg' ? 'Experienced ' : 'Not experienced'})
         }
         let stat6Chart = new CanvasJS.Chart("stat6Chart", {
             animationEnabled: true,
             title: {
-                text: "Among job seeker users, what are the search sources "
+                text: "Average job search time among experienced & not experienced users",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
             },
             axisX: {
                 interval: 1,
@@ -213,7 +228,6 @@ request.onreadystatechange = function(){
             data: [
                 {
                     type: "column",
-                    showInLegend: true,
                     dataPoints: stat6Data
                 }
             ]
@@ -223,7 +237,10 @@ request.onreadystatechange = function(){
         let stat7Chart = new CanvasJS.Chart("stat7Chart", {
             animationEnabled: true,
             title: {
-                text: "Out of the job seekers, what is the scope of the job requested by age."
+                text: "Acceptance rate among users who prepared & not prepared to the test",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
             },
             axisX: {
                 interval: 1,
@@ -259,7 +276,7 @@ request.onreadystatechange = function(){
         stat7Chart.render();
     }
 }
-request.open('POST', 'results.php', true);
+request.open('POST', '/phpProject/results/stats.php', true);
 request.setRequestHeader('Content-type', 'application/json');
 request.send();
 console.log(dataPoints);

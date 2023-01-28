@@ -2,15 +2,15 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Results</title>
-        <link rel="stylesheet" href="style.css">
+        <title>Statistics</title>
+        <link rel="stylesheet" href="../css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
               rel="stylesheet">
         <script>
             if(!document.cookie.includes('signed_in=true')){
-                window.location = '/phpProject/index.php'
+                window.location = '../index.php'
             }
         </script>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -18,23 +18,23 @@
     <body>
         <header>
             <nav class="navbar">
-                <a class="logo-item" href="index.php" id="logo"><img src="img/survey-icon-12.png"></a>
-                <a class="menu-item" href="#">Survey</a>
+                <a class="logo-item" href="../index.php" id="logo"><img src="../img/survey-icon-12.png"></a>
+                <a class="menu-item" href="../index.php">Home</a>
                 <a class="menu-item" href="answers.php">My answers</a>
-                <a class="menu-item" href="#">Results</a>
+                <a class="menu-item" href="#">Statistics</a>
                 <a class="login-item" onclick="logout()">
-                    <div id="login-nav"><img src="img/login-icon.svg"></div>
+                    <div id="login-nav"><img src="../img/login-icon.svg"></div>
                 </a>
             </nav>
         </header>
         <main>
             <section class="charts-container">
-                <div id="stackedColumnsContainer" class="charts"></div>
+                <div id="stat1Chart" class="charts"></div>
 
-                <div id="pieChartContainer" class="charts"></div>
+                <div id="stat2Chart" class="charts"></div>
             </section>
             <section class="charts-container">
-                <div id="columnChartContainer" class="charts"></div>
+                <div id="stat3Chart" class="charts"></div>
 
                 <div id="stat4Chart" class="charts"></div>
             </section>
@@ -46,7 +46,7 @@
                 <div id="stat7Chart" class="charts"></div>
             </section>
         </main>
-        <script src="stats.js"></script>
-        <script src="script.js"></script>
+        <script src="../js/stats.js"></script>
+        <script src="../js/script.js"></script>
     </body>
 </html>

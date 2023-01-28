@@ -1,12 +1,12 @@
 <?php
-require_once('includes/init.php');
-require_once('includes/survey_part1.php');
-require_once('includes/survey_part2.php');
-require_once('includes/survey_part3.php');
-include('navbar-menu.html');
+require_once('../includes/init.php');
+require_once('../includes/survey_part1.php');
+require_once('../includes/survey_part2.php');
+require_once('../includes/survey_part3.php');
+include('../static/navbar-menu.html');
 global $session;
 if (!$session->signed_in) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }
 $user_id = $session->user_id;
@@ -68,11 +68,11 @@ if(User::is_answered($user_id) == 1){
                     <p class="answers">'. $part3[0]->question12 .'</p>
                 </div>
                 <div id="q13" class="q_a">
-                    <p class="question">13. How long did you invest for searching work?</p>
+                    <p class="question">13. How many hours did you spend looking for a job a day?</p>
                     <p class="answers">'. $part3[0]->question13 .'</p>
                 </div>
                 <div id="q14" class="q_a">
-                    <p class="question">14. Did you ever get accepted to work?</p>
+                    <p class="question">14. Did you ever get accepted for a job?</p>
                     <p class="answers">'. $part3[0]->question14 .'</p>
                 </div>
                 <div id="q15" class="q_a">

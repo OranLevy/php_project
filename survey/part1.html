@@ -23,23 +23,14 @@
   <section class="survey-section">
     <h1 class="headline">Part 1 - General information</h1>
     <form method="post" class="form" action="part1.php">
-      <div class="error" id="php_error" style="display: none;" >
-        <?php if(isset($_SESSION['error'])){
-							echo $_SESSION['error'];
+      <?php if(isset($_SESSION['error'])){
+							echo $error_message;
 						}
 						?>
-      </div>
-      <div id="php_success" style="display: none;">
-        <?php if(isset($_SESSION['success'])){
-							echo $_SESSION['success'];
-						}else{
-							if($_POST && !isset($_SESSION['error'])){
-								echo 'Answers submitted';
-							}
-
+      <?php if(isset($_SESSION['success'])){
+							echo $success_message;
 						}
 						?>
-      </div>
       <div id="q1" class="survey-q">
         <label class="q_label" for="city_q">1. In which city do you live?</label>
         <p class="required_message">* Required</p>
@@ -120,8 +111,5 @@
   </section>
 </main>
 </body>
-<script type="text/javascript" src="script.js"></script>
-<script type="text/javascript">
-  showDivsError();
-</script>
+<script type="text/javascript" src="/phpProject/js/script.js"></script>
 </html>

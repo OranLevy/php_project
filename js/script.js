@@ -9,20 +9,6 @@ function showQuestions(){
     }
 }
 
-function showDivsError(){
-    if(document.getElementById('php_error').childNodes.length > 1){
-        document.getElementById('php_error').style.display = 'block';
-    }else{
-        document.getElementById('php_error').style.display = 'none';
-    }
-
-    if(document.getElementById('php_success').childNodes.length > 1){
-        document.getElementById('php_success').style.display = 'block';
-    }else{
-        document.getElementById('php_success').style.display = 'none';
-    }
-}
-
 function createUser(){
     let request = new XMLHttpRequest();
     let userData = {
@@ -68,32 +54,6 @@ function createUser(){
     request.send(payload);
 }
 
-function sendAnswers1(){
-    let request = new XMLHttpRequest();
-    let data = {
-        'part': 1,
-        'q1': $('#city_q').val(),
-        'q2': $('#age_q').val(),
-        'q3': $('#work_in').val(),
-        'q4': $('#new_job').val(),
-        'q5': $('#work_scope').val(),
-        'q6': $('#work_experience').val()
-    };
-    request.onreadystatechange = function (){
-        if(request.readyState === 4 && request.status === 200){
-            console.log(request);
-            document.getElementById('php_success').innerHTML = request.responseText;
-        }
-    }
-    request.open('POST', 'survey.php', true);
-    request.setRequestHeader('Content-type', 'application/json');
-    let payload = JSON.stringify(data);
-    request.send(payload);
-
-}
-
-
-
 function logout() {
-    window.location = 'logout.php';
+    window.location = '/phpProject/static/logout.php';
 }

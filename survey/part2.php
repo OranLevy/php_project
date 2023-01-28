@@ -1,7 +1,7 @@
 <?php
-require_once('includes/survey_part2.php');
-require_once('includes/init.php');
-include('navbar-menu.html');
+require_once('../includes/survey_part2.php');
+require_once('../includes/init.php');
+include('../static/navbar-menu.html');
 global $session;
 global $database;
 if($database->get_connection()){
@@ -11,18 +11,21 @@ if($database->get_connection()){
 }
 $user_id = $_SESSION['user_id'];
 if(!$session->signed_in){
-    header('Location: login.php');
+    header('Location: /phpProject/login.php');
     exit;
 }
 if(User::is_answered($user_id) == 1){
-    header('Location: index.php');
+    header('Location: /phpProject/index.php');
     exit;
 }
 unset($_SESSION['error']);
+if(isset($_SESSION['success'])){
+    $success_message = '<div class="success" id="php_success">'. $_SESSION['success'] .'</div>';
+}
 
 if ($_POST) {
     if(isset($_POST['save']) || isset($_POST['save_continue'])){
-        if (!$_POST['work_city']) {
+        if (!$_POST['work_city'] || $_POST['work_city'] == ' ') {
             $error = 'Q7 is required.<br>';
         }
         if (!$_POST['position_q'] || $_POST['position_q'] == '-') {
@@ -62,16 +65,18 @@ if ($_POST) {
 
         if (isset($error)) {
             $_SESSION['error'] = $error;
+            $error_message = '<div class="error" id="php_error">'. $_SESSION['error'] .'</div>';
             unset($_SESSION['success']);
         } else {
             if (!SurveyPart2::check_id_answers($user_id)) {
                 $success = SurveyPart2::add_answers($user_id, $_POST['work_city'], $_POST['position_q'], $_POST['work_time'], $_POST['salary'], $_POST['get_job']);
-                $success = 'Answers added.';
+                $success = 'Answers saved';
             } else {
                 $success = SurveyPart2::update_answers($user_id, $_POST['work_city'], $_POST['position_q'], $_POST['work_time'], $_POST['salary'], $_POST['get_job']);
-                $success = $success . 'ID of the answers already exist in DB <br>Updating answers.';
+                $success = $success . 'Answers saved';
             }
             $_SESSION['success'] = $success;
+            $success_message = '<div class="success" id="php_success">'. $_SESSION['success'] .'</div>';
         }
     }
     if(isset($_POST['save_continue'])){
@@ -101,10 +106,11 @@ $context  = stream_context_create($opts);
 
 $result = file_get_contents('https://countriesnow.space/api/v0.1/countries/cities', false, $context);
 $result = json_decode($result);
+array_unshift($result->data, ' ');
 $cities_arr = json_encode($result->data);
 echo '<script>let cities ='.$cities_arr.'</script>';
 
-include('survey_html/part2.html');
+include('part2.html');
 if(SurveyPart2::check_id_answers($user_id)){
     $part2_val = SurveyPart2::fetch_answers_by_user($user_id)[0];
     echo '<script>

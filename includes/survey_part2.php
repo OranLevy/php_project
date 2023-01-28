@@ -1,5 +1,5 @@
 <?php
-require_once('includes/database.php');
+require_once('database.php');
 class SurveyPart2 {
     private $user_id;
     private $question7;

@@ -1,5 +1,5 @@
 <?php
-require_once('includes/database.php');
+require_once('database.php');
 class SurveyPart1 {
     private $user_id;
     private $question1;
@@ -126,7 +126,7 @@ class SurveyPart1 {
         $result = $database->query($sql)->fetch_assoc();
         if(!is_null($result)){
             $counter = 0;
-            // Coniditional question
+            // Conditional question
             $q4 = $result['question4'];
             foreach ($result as $val){
                 if(strlen($val) > 1){

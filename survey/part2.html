@@ -24,23 +24,14 @@
   <section class="survey-section">
     <h1 class="headline">Part 2 - Work experience</h1>
     <form method="post" class="form" action="part2.php">
-      <div class="error" id="php_error" style="display: none;">
-        <?php if(isset($_SESSION['error'])){
-							echo $_SESSION['error'];
+      <?php if(isset($_SESSION['error'])){
+							echo $error_message;
 						}
 						?>
-      </div>
-      <div id="php_success" style="display: none;">
-        <?php if(isset($_SESSION['success'])){
-							echo $_SESSION['success'];
-						}else{
-							if($_POST && !isset($_SESSION['success'])){
-								echo 'Answers submitted';
-							}
-
+      <?php if(isset($_SESSION['success'])){
+							echo $success_message;
 						}
 						?>
-      </div>
       <div id="q7" class="survey-q">
         <label class="q_label" for="work_city">7. In which city is your work located?</label>
         <p class="required_message">* Required</p>
@@ -56,11 +47,13 @@
         <p class="q_paragraph">
           <select name="position_q" id="position_q">
             <option value="-"></option>
-            <option value="Full stack developer">Full stack developer</option>
-            <option value="Product Manager">Product Manager</option>
-            <option value="Back end developer">Back end developer</option>
-            <option value="Front end developer">Front end developer</option>
-            <option value="UI/UX Designer">UI/UX Designer</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="QA Engineer">QA Engineer</option>
+            <option value="Technical Support">Technical Support</option>
+            <option value="IT Manager">IT Manager</option>
+            <option value="SOC/NOC">SOC/NOC</option>
+            <option value="Developer">Developer</option>
+            <option value="Other">Other</option>
           </select>
         </p>
       </div>
@@ -95,9 +88,9 @@
           <select name="get_job" id="get_job">
             <option value="-"></option>
             <option value="Linkdein">Linkdein</option>
-            <option value="Friend">Friend</option>
-            <option value="Facebook">Facebook</option>
+            <option value="Friends">Friends</option>
             <option value="HR Company">HR Company</option>
+            <option value="Other">Other</option>
           </select>
         </p>
       </div>
@@ -108,8 +101,5 @@
   </section>
 </main>
 </body>
-<script type="text/javascript" src="script.js"></script>
-<script type="text/javascript">
-  showDivsError();
-</script>
+<script type="text/javascript" src="/phpProject/js/script.js"></script>
 </html>
