@@ -276,7 +276,7 @@ request.onreadystatechange = function(){
         stat7Chart.render();
     }
 }
-request.open('POST', '/phpProject/results/stats.php', true);
+request.open('POST', '/php_project/results/stats.php', true);
 request.setRequestHeader('Content-type', 'application/json');
 request.send();
 console.log(dataPoints);

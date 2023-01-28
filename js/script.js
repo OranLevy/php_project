@@ -55,5 +55,5 @@ function createUser(){
 }
 
 function logout() {
-    window.location = '/phpProject/static/logout.php';
+    window.location = '/php_project/static/logout.php';
 }
