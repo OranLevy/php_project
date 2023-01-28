@@ -1,8 +1,8 @@
 <?php
 const DB_HOST = 'localhost';
-const DB_USER = 'root';
-const DB_PASS = 'root';
-const DB_NAME = 'php_project';
+const DB_USER = 'oranle_admin';
+const DB_PASS = 'admin';
+const DB_NAME = 'oranle_php_project';
 
 ?>
 
