@@ -80,6 +80,11 @@ if($answers){
         }
         if(!$answers['q13'] || $answers['q13'] == '-'){
             $error['q13_error'] = 'Q13 is required';
+        }else if(is_numeric($answers['q13'])){
+            $q13 = (int)$answers['q13'];
+            if($q13 < 0){
+                $error['q13_error'] = 'Hours need to be greater than 0';
+            }
         }
         if(!$answers['q14'] || $answers['q14'] == '-'){
             $error['q14_error'] = 'Q14 is required';
@@ -168,5 +173,8 @@ if($answers){
             );
         }
         echo json_encode($response);
+    }
+    if($answers['action'] == 'userSubmitAnswers'){
+        User::survey_answered($user_id);
     }
 }

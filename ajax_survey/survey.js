@@ -72,10 +72,12 @@ function answer_part1_continue(){
                     $('#survey-part1').hide();
                     $('#survey-part2').show();
                     $('#part1-continue-success').html(resp['success']);
+                    $('#part1-continue-success').show();
                 }else{
                     $('#survey-part1').hide();
                     $('#survey-part3').show();
                     $('#part2-continue-success').html(resp['success']);
+                    $('#part2-continue-success').show();
                 }
 
             }
@@ -180,6 +182,7 @@ function answer_part2_continue(){
                 $('#survey-part2').hide();
                 $('#survey-part3').show();
                 $('#part2-continue-success').html(resp['success']);
+                $('#part2-continue-success').show();
             }
             if('error' in resp){
                 $('.error-survey').html('');
@@ -228,6 +231,7 @@ function answer_part3(){
             console.log(resp);
             if('success' in resp){
                 $('#part3-success').html(resp['success']);
+                $('#part3-success').show();
                 $('.error-survey').hide();
                 $('#part2-continue-success').hide();
             }
@@ -280,6 +284,7 @@ function answer_part3_continue(){
             console.log(resp);
             console.log('Part 3 submitted');
             if('success' in resp){
+                submitAnswers();
                 window.location = '/phpProject/index.php';
             }
             if('error' in resp){
@@ -304,6 +309,7 @@ function answer_part3_continue(){
             }
             if('success' in resp){
                 $('#part3-success').html(resp['success']);
+                $('#part3-success').show();
             }
         }
     }
@@ -403,3 +409,18 @@ function showPartSection(){
     }
 }
 
+function submitAnswers(){
+    let request = new XMLHttpRequest();
+    let payload = {
+        'action': 'userSubmitAnswers'
+    }
+    request.onreadystatechange = function(){
+        if(request.readyState === 4 && request.status === 200){
+            console.log('Answers submitted');
+        }
+    }
+    request.open('POST', 'survey.php', true);
+    request.setRequestHeader('Content-type', 'application/json');
+    payload = JSON.stringify(payload);
+    request.send(payload);
+}

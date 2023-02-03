@@ -100,7 +100,7 @@
                 </div>
                 <br>
                 <div id="q4" class="survey-q">
-                    <label class="q_label" for="new_job">4. Are you looking for a new job?</label>
+                    <label class="q_label" for="new_job">4.  Are you looking for a new job in this industry?</label>
                     <p class="required_message">* Required</p>
                     <p class="q_paragraph">
                         <select name="new_job" id="new_job" onchange="showQuestions()">
@@ -126,7 +126,7 @@
                 </div>
                 <br>
                 <div id="q6" class="survey-q" style="display: none;">
-                    <label class="q_label" for="work_experience">6. Do you have work experience?</label>
+                    <label class="q_label" for="work_experience">6. Do you have work experience in this industry?</label>
                     <p class="required_message">* Required</p>
                     <p class="q_paragraph">
                         <select name="work_experience" id="work_experience">
@@ -150,7 +150,7 @@
             <form class="form">
                 <div id="response-part2"></div>
                 <div id="q7" class="survey-q">
-                    <label class="q_label" for="work_city">7. In which city is your work located?</label>
+                    <label class="q_label" for="work_city">7. In which city is your last/current work located?</label>
                     <p class="required_message">* Required</p>
                     <p class="q_paragraph">
                         <select name="work_city" id="work_city" class="work_city">
@@ -228,7 +228,7 @@
             <form class="form">
                 <div id="response-part3"></div>
                 <div id="q12" class="survey-q">
-                    <label class="q_label">12. In which sources did you look for job?</label>
+                    <label class="q_label">12. In which sources are you looking for work?</label>
                     <p class="required_message">* Required</p>
                     <p class="checkboxes_paragraph">
                         <input type="checkbox" name="search_source[]" class="search_source" id="Linkdein" value="Linkdein">
@@ -244,7 +244,7 @@
                 </div>
                 <br>
                 <div id="q13" class="survey-q">
-                    <label class="q_label" for="hour_search">13. How many hours did you spend looking for a job a day?</label>
+                    <label class="q_label" for="hour_search">13. How many hours a day (on average) do you spend during the periods when you are looking for a job?</label>
                     <p class="required_message">* Required</p>
                     <p class="q_paragraph">
                         <input type="number" name="hour_search" id="hour_search">
@@ -279,7 +279,7 @@
                 </div>
                 <br>
                 <div id="q16" class="survey-q">
-                    <label class="q_label" for="test_prepared">16. Did you get prepared to the test?</label>
+                    <label class="q_label" for="test_prepared">16. Did you get prepared to the test/interview?</label>
                     <p class="required_message">* Required</p>
                     <p class="q_paragraph">
                         <select name="test_prepared" id="test_prepared">
@@ -297,6 +297,12 @@
         </section>
     </main>
     <script type="text/javascript" src="/phpProject/js/script.js"></script>
-    <script>showPartSection();showQuestions();</script>
+    <script>
+        showPartSection();
+        setTimeout(function(){
+            showQuestions();
+        },200);
+
+    </script>
 </body>
 </html>

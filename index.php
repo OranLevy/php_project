@@ -39,7 +39,7 @@ if(!(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id, 
     $progress_message = "<div>Looks like you answered all the questions! <br> You can submit your answers right here or review your answers before submitting.</div>";
     $survey_button = '<button class="btn-submit" name="submit_survey">Submit answers</button> <button class="btn-save" name="review_answers">Review answers</button>';
 }else{
-    $progress_message = "<div>Thank you for answering our survey! &#128591 <br> You can see the submitted answers by clicking <a href='results/answers.php'>here</a></div>";
+    $progress_message = "<div>Thank you for answering our survey! &#128591 <br> You can see the submitted answers by clicking <a href='results/answers.php' style='font-weight: bold;'>here</a></div>";
     $survey_button = '';
 }
 

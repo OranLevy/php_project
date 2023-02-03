@@ -308,3 +308,20 @@ a, .menu-item, .login-item {
 .questions_answers{
     padding: 30px;
 }
+
+.error-survey{
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
+}
+
+.success-resp{
+    display: none;
+    text-align: center;
+    height: 20px;
+    margin-bottom: 50px;
+    background: #d0eec0;
+    padding: 10px;
+    border: 2px solid #8bc34a;
+    border-radius: 10px;
+}
