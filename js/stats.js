@@ -21,7 +21,41 @@ request.onreadystatechange = function(){
         dataPoints.push(data);
         console.log(dataPoints[0])
         // Stat 1
+        let cities = Object.keys(dataPoints[0]['stat1']['cities_work_in']);
+        let pieData = []
+        for(let i = 0; i < cities.length; i++){
+            pieData.push({y: dataPoints[0]['stat1']['cities_work_in'][cities[i]] , name: cities[i]})
+        }
         let stat1Chart = new CanvasJS.Chart("stat1Chart", {
+            animationEnabled: true,
+            title: {
+                text: "The percentage employed in the high-tech industry by city of residence",
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 20,
+                fontWeight: 'bolder'
+            },
+            axisX: {
+                interval: 1,
+            },
+            axisY: {
+                // valueFormatString: "$#0bn",
+                gridColor: "#B6B1A8",
+                tickColor: "#B6B1A8"
+            },
+            toolTip: {
+                shared: true,
+            },
+            data: [
+                {
+                    type: "pie",
+                    showInLegend: true,
+                    dataPoints: pieData
+                }
+            ]
+        });
+        stat1Chart.render();
+        // Stat 2
+        let stat2Chart = new CanvasJS.Chart("stat2Chart", {
             animationEnabled: true,
             title: {
                 text: "Out of the job seekers, what is the scope of the job requested by age.",
@@ -62,40 +96,6 @@ request.onreadystatechange = function(){
                         {y: dataPoints[0]['stat2']['31-35']['part_time'], label: "31-35" },
                         {y: dataPoints[0]['stat2']['36-40']['part_time'], label: "36-40"},
                     ]
-                }
-            ]
-        });
-        stat1Chart.render();
-        // Stat 2
-        let cities = Object.keys(dataPoints[0]['stat1']['cities_work_in']);
-        let pieData = []
-        for(let i = 0; i < cities.length; i++){
-            pieData.push({y: dataPoints[0]['stat1']['cities_work_in'][cities[i]] , name: cities[i]})
-        }
-        let stat2Chart = new CanvasJS.Chart("stat2Chart", {
-            animationEnabled: true,
-            title: {
-                text: "The percentage employed in the high-tech industry by city of residence",
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: 20,
-                fontWeight: 'bolder'
-            },
-            axisX: {
-                interval: 1,
-            },
-            axisY: {
-                // valueFormatString: "$#0bn",
-                gridColor: "#B6B1A8",
-                tickColor: "#B6B1A8"
-            },
-            toolTip: {
-                shared: true,
-            },
-            data: [
-                {
-                    type: "pie",
-                    showInLegend: true,
-                    dataPoints: pieData
                 }
             ]
         });

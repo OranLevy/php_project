@@ -68,9 +68,16 @@ function answer_part1_continue(){
             let resp = JSON.parse(request.responseText);
             console.log(resp);
             if('success' in resp){
-                $('#survey-part1').hide();
-                $('#survey-part2').show();
-                $('#part1-continue-success').html(resp['success']);
+                if($('#work_experience').val() === 'Yes'){
+                    $('#survey-part1').hide();
+                    $('#survey-part2').show();
+                    $('#part1-continue-success').html(resp['success']);
+                }else{
+                    $('#survey-part1').hide();
+                    $('#survey-part3').show();
+                    $('#part2-continue-success').html(resp['success']);
+                }
+
             }
             if('error' in resp){
                 $('.error-survey').html('');
@@ -357,7 +364,10 @@ function fetchUserAnswers(){
             }
             if('part3' in answers){
                 let part3 = answers['part3'];
-                // $('#work_city').val(part3['q7']), q12
+                let q12 = part3['q12'].split(',');
+                for(let i = 0; i < q12.length; i++){
+                    document.getElementById(q12[i]).checked = true
+                }
                 $('#hour_search').val(part3['q13']),
                 $('#get_accepted').val(part3['q14']),
                 $('#hiring_test').val(part3['q15']),
@@ -377,14 +387,18 @@ function fetchUserAnswers(){
 function showPartSection(){
     let url = window.location.hash;
     if(url.includes('#survey-part1')){
+        $('#survey-part3').hide();
+        $('#survey-part2').hide();
         $('#survey-part1').show()
     }
     if(url.includes('#survey-part2')){
         $('#survey-part1').hide();
+        $('#survey-part3').hide();
         $('#survey-part2').show()
     }
     if(url.includes('#survey-part3')){
         $('#survey-part1').hide();
+        $('#survey-part2').hide();
         $('#survey-part3').show()
     }
 }

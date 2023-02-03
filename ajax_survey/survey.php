@@ -75,9 +75,9 @@ if($answers){
         }
     }
     if($answers['action'] == 'part3'){
-//        if(!$answers['q12'] || $answers['q12'] == ' '){
-//            $error['q12_error'] = 'Q12 is required';
-//        }
+        if(!$answers['q12'] || $answers['q12'] == ' '){
+            $error['q12_error'] = 'Q12 is required';
+        }
         if(!$answers['q13'] || $answers['q13'] == '-'){
             $error['q13_error'] = 'Q13 is required';
         }
@@ -95,10 +95,10 @@ if($answers){
             echo $error;
         }else{
             if(!SurveyPart3::check_id_answers($user_id)){
-                $resp = SurveyPart3::add_answers($user_id,'' , $answers['q13'], $answers['q14'], $answers['q15'],$answers['q16']);
+                $resp = SurveyPart3::add_answers($user_id,$answers['q12'] , $answers['q13'], $answers['q14'], $answers['q15'],$answers['q16']);
                 echo json_encode(array('success'=>'Part 3: Answers added successfully'));
             }else{
-                $resp = SurveyPart3::update_answers($user_id,'' , $answers['q13'], $answers['q14'], $answers['q15'],$answers['q16']);
+                $resp = SurveyPart3::update_answers($user_id,$answers['q12'] , $answers['q13'], $answers['q14'], $answers['q15'],$answers['q16']);
                 echo json_encode(array('success'=>'Part 3: Answers updated successfully'));
             }
         }

@@ -12,7 +12,9 @@ $part3 = null;
 $i = 0;
 foreach ($answered_users as $user){
     $part1[$i] = SurveyPart1::fetch_answers_by_user($user["user_id"]);
-    $part2[$i] = SurveyPart2::fetch_answers_by_user($user["user_id"]);
+    if($part1[$i][0]->question6 == 'Yes'){
+        $part2[$i] = SurveyPart2::fetch_answers_by_user($user["user_id"]);
+    }
     $part3[$i] = SurveyPart3::fetch_answers_by_user($user["user_id"]);
     $i++;
 }

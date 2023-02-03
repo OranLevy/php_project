@@ -118,10 +118,14 @@ class SurveyPart2 {
         return 0;
     }
 
-    public static function is_part_done($user_id){
+    public static function is_part_done($user_id, $part1_q3 = 'Yes'){
         global $database;
         $sql = "SELECT question7, question8, question9, question10, question11 FROM survey_part2 WHERE user_id = '" . $user_id . "'";
         $result = $database->query($sql)->fetch_assoc();
+        if($part1_q3 == 'No'){
+            // If user chose in q6 part 1 NO - skip part 2
+            return true;
+        }
         if(!is_null($result)){
             $counter = 0;
             foreach ($result as $val){
