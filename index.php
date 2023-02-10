@@ -10,9 +10,6 @@ if(!$session->signed_in){
 }
 include('static/navbar-menu.html');
 
-// Clean success and error messages
-unset($_SESSION['success']);
-unset($_SESSION['error']);
 
 $user_id = $session->user_id;
 $user = new User();
@@ -21,7 +18,9 @@ $hello_message =  '<h1 id="welcome-title">Hello ' . $user->first_name . ' ' . $u
 if(SurveyPart1::check_id_answers($user_id)){
     $part1 = SurveyPart1::fetch_answers_by_user($user_id);
     $part1_q6 = $part1[0]->question6;
+    $part1_q4 = $part1[0]->question4;
 }else{
+    $part1_q4 = 'No';
     $part1_q6 = 'No';
 }
 
@@ -29,13 +28,17 @@ $count_part1 = SurveyPart1::count_answered_by_id($user_id);
 $count_part2 = SurveyPart2::count_answered_by_id($user_id);
 $count_part3 = SurveyPart3::count_answered_by_id($user_id);
 $progress = $count_part1 + $count_part2 + $count_part3;
-if(!(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id, $part1_q6) && SurveyPart3::is_part_done($user_id)) && $progress > 0 && User::is_answered($user_id) == 0) {
+
+// add to SESSION how many questions answered in order to pass this info to another page
+$_SESSION['questions_progress'] = $progress;
+
+if(!(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id,$part1_q4, $part1_q6) && SurveyPart3::is_part_done($user_id)) && $progress > 0 && User::is_answered($user_id) == 0) {
     $progress_message = '<div>Good job! &#128170 <br> You already answered '. $progress .' questions</div>';
     $survey_button = '<button class="btn-submit" name="continue_survey">Continue survey</button> <button class="btn-save" name="review_answers">Review answered questions</button>';
 }else if($progress == 0 && User::is_answered($user_id) == 0){
     $progress_message = "<div>Looks like you still didn't start to answer the survey... &#128534 <br> Don't worry! you can do it by clicking just below &#128513 </div>";
     $survey_button = '<button class="btn-save" name ="start_survey">Start survey</button>';
-}else if(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id, $part1_q6) && SurveyPart3::is_part_done($user_id) && User::is_answered($user_id) == 0){
+}else if(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id,$part1_q4, $part1_q6) && SurveyPart3::is_part_done($user_id) && User::is_answered($user_id) == 0){
     $progress_message = "<div>Looks like you answered all the questions! <br> You can submit your answers right here or review your answers before submitting.</div>";
     $survey_button = '<button class="btn-submit" name="submit_survey">Submit answers</button> <button class="btn-save" name="review_answers">Review answers</button>';
 }else{
@@ -47,7 +50,7 @@ if(!(SurveyPart1::is_part_done($user_id) && SurveyPart2::is_part_done($user_id, 
 // Handle buttons click
 if($_POST){
     if(isset($_POST['start_survey'])){
-        header('Location: /phpProject/ajax_survey/survey.html');
+        header('Location: /phpProject/survey/survey.html');
         exit;
     }
     if(isset($_POST['submit_survey'])){
@@ -57,20 +60,20 @@ if($_POST){
     }
     if(isset($_POST['continue_survey'])){
         if(!SurveyPart1::is_part_done($user_id)){
-            header('Location: /phpProject/ajax_survey/survey.html');
+            header('Location: /phpProject/survey/survey.html');
             exit;
         }
-        if(!SurveyPart2::is_part_done($user_id, $part1_q6)){
-            header('Location: /phpProject/ajax_survey/survey.html#survey-part2');
+        if(!SurveyPart2::is_part_done($user_id,$part1_q4, $part1_q6)){
+            header('Location: /phpProject/survey/survey.html#survey-part2');
             exit;
         }
         if(!SurveyPart3::is_part_done($user_id)){
-            header('Location: /phpProject/ajax_survey/survey.html#survey-part3');
+            header('Location: /phpProject/survey/survey.html#survey-part3');
             exit;
         }
     }
     if(isset($_POST['review_answers'])){
-        header('Location: /phpProject/ajax_survey/survey.html');
+        header('Location: /phpProject/survey/survey.html');
         exit;
     }
 }

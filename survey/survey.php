@@ -53,10 +53,13 @@ if($answers){
         if(!$answers['q9'] || $answers['q9'] == '-'){
             $error['q9_error'] = 'Q9 is required';
         }
-        if(!$answers['q10']){
+        if($answers['q10'] == ' '){
             $error['q10_error'] = 'Q10 is required';
-        }else if(!is_numeric($answers['q10'])){
-            $error['q10_error'] = 'Q10 needs to be numeric';
+        }else if(is_numeric($answers['q10'])){
+            $q10 = (int)$answers['q10'];
+            if($q10 < 0){
+                $error['q10_error'] = 'Salary needs to be greater than 0';
+            }
         }
         if(!$answers['q11'] || $answers['q11'] == '-'){
             $error['q11_error'] = 'Q11 is required';
@@ -78,7 +81,7 @@ if($answers){
         if(!$answers['q12'] || $answers['q12'] == ' '){
             $error['q12_error'] = 'Q12 is required';
         }
-        if(!$answers['q13'] || $answers['q13'] == '-'){
+        if($answers['q13'] == ' ' || $answers['q13'] == ''){
             $error['q13_error'] = 'Q13 is required';
         }else if(is_numeric($answers['q13'])){
             $q13 = (int)$answers['q13'];

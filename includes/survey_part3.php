@@ -109,7 +109,7 @@ class SurveyPart3 {
         if(!is_null($result)){
             $counter = 0;
             foreach ($result as $val){
-                if(strlen($val) > 1){
+                if(strlen($val) >= 1){
                     $counter += 1;
                 }
             }
@@ -125,7 +125,7 @@ class SurveyPart3 {
         if(!is_null($result)){
             $counter = 0;
             foreach ($result as $val){
-                if(strlen($val) > 1){
+                if(strlen($val) >= 1){
                     $counter += 1;
                 }
             }

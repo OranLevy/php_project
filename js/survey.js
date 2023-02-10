@@ -285,7 +285,7 @@ function answer_part3_continue(){
             console.log('Part 3 submitted');
             if('success' in resp){
                 submitAnswers();
-                window.location = '/phpProject/index.php';
+                window.location = '../index.php';
             }
             if('error' in resp){
                 $('.error-survey').html('');

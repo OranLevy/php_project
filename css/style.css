@@ -286,15 +286,16 @@ a, .menu-item, .login-item {
     font-weight: 600;
 }
 
-.charts{
-    width: 100% !important;
-    height: 300px;
-    display: inline-block;
-}
+/*.charts{*/
+/*    width: 100% !important;*/
+/*    height: 300px;*/
+/*    display: inline-block;*/
+/*}*/
 
 .charts-container{
     display: flex;
     gap: 50px;
+    justify-content: center;
 }
 
 .canvasjs-chart-credit{

@@ -23,10 +23,13 @@ request.onreadystatechange = function(){
         // Stat 1
         let cities = Object.keys(dataPoints[0]['stat1']['cities_work_in']);
         let pieData = []
+        // let width1 = $('#stat1Chart').width();
         for(let i = 0; i < cities.length; i++){
             pieData.push({y: dataPoints[0]['stat1']['cities_work_in'][cities[i]] , name: cities[i]})
         }
         let stat1Chart = new CanvasJS.Chart("stat1Chart", {
+            width: 600,
+            height:300,
             animationEnabled: true,
             title: {
                 text: "The percentage employed in the high-tech industry by city of residence",
@@ -56,6 +59,8 @@ request.onreadystatechange = function(){
         stat1Chart.render();
         // Stat 2
         let stat2Chart = new CanvasJS.Chart("stat2Chart", {
+            width: 600,
+            height:300,
             animationEnabled: true,
             title: {
                 text: "Out of the job seekers, what is the scope of the job requested by age.",
@@ -107,6 +112,8 @@ request.onreadystatechange = function(){
             colData.push({y: calcAvg(dataPoints[0]['stat3'][cities_2[i]]) ,label: cities_2[i]})
         }
         let stat3Chart = new CanvasJS.Chart("stat3Chart", {
+            width: 600,
+            height:300,
             animationEnabled: true,
             title: {
                 text: "Average salary per hour by city of work",
@@ -140,6 +147,8 @@ request.onreadystatechange = function(){
             stat4Data.push({y: dataPoints[0]['stat4'][stat4_cities[i]], name: stat4_cities[i]})
         }
         let stat4Chart = new CanvasJS.Chart("stat4Chart", {
+            width: 600,
+            height:300,
             animationEnabled: true,
             title: {
                 text: " Search sources among job seekers",

@@ -138,7 +138,7 @@ if(User::is_answered($user_id) == 1){
     }
 
 }else{
-    $question_answers_html = '<section>This page is available only after submitting answers.</section>';
+    $question_answers_html = '<section>This page is available only after submitting answers.<br><br> You have answered <span style="font-weight: bold">'. $_SESSION['questions_progress'] .' questions </span> so far &#129488;</section>';
 }
 ?>
 <!DOCTYPE html>
